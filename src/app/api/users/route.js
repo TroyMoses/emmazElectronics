@@ -4,9 +4,16 @@ import mongoose from "mongoose";
 
 export async function GET() {
   mongoose.connect(process.env.MONGO_URL);
-  if (await isAdmin()) {
-    const users = await User.find();
-    return Response.json(users);
+  // if (await isAdmin()) {
+  //   const users = await User.find();
+  //   return Response.json(users);
+  // } else {
+  //   return Response.json([]);
+  // }
+  
+  const users = await User.find();
+  if (users) {
+    return Response.json(users);  
   } else {
     return Response.json([]);
   }
