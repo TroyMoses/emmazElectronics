@@ -7,4 +7,4 @@ const UserSchema = new Schema({
   image: {type: String},
 }, {timestamps: true});
 
-export const User = models?.User || model('User', UserSchema);
+export const User = models?.Uzer || model('Uzer', UserSchema);

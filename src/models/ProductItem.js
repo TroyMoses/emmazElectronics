@@ -1,18 +1,18 @@
 import mongoose, {model, models, Schema} from "mongoose";
 
-const ExtraPriceSchema = new Schema({
+const BrandPriceSchema = new Schema({
   name: String,
   price: Number,
 });
 
-const MenuItemSchema = new Schema({
+const ProductItemSchema = new Schema({
   image: {type: String},
   name: {type: String},
   description: {type: String},
   category: {type: mongoose.Types.ObjectId},
   basePrice: {type: Number},
-  sizes: {type:[ExtraPriceSchema]},
-  extraIngredientPrices: {type:[ExtraPriceSchema]},
+  sizes: {type:[BrandPriceSchema]},
+  brandPrices: {type:[BrandPriceSchema]},
 }, {timestamps: true});
 
-export const MenuItem = models?.MenuItem || model('MenuItem', MenuItemSchema);
+export const ProductItem = models?.ProductItem || model('ProductItem', ProductItemSchema);

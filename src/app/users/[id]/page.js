@@ -10,6 +10,7 @@ export default function EditUserPage() {
   const {loading, data} = useProfile();
   const [user, setUser] = useState(null);
   const {id} = useParams();
+  console.log(id);
 
   useEffect(() => {
     fetch('/api/profile?_id='+id).then(res => {
@@ -44,13 +45,13 @@ export default function EditUserPage() {
     return 'Loading user profile...';
   }
 
-  if (!data.admin) {
-    return 'Not an admin';
+  if (!data) {
+    return 'No profile found';
   }
 
   return (
     <section className="mt-8 mx-auto max-w-2xl">
-      <UserTabs isAdmin={true} />
+      <UserTabs />
       <div className="mt-8">
         <UserForm user={user} onSave={handleSaveButtonClick} />
       </div>

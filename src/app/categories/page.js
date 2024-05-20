@@ -78,13 +78,13 @@ export default function CategoriesPage() {
     return 'Loading user info...';
   }
 
-  if (!profileData.admin) {
-    return 'Not an admin';
+  if (!profileData) {
+    return 'No profile found';
   }
 
   return (
     <section className="mt-8 max-w-2xl mx-auto">
-      <UserTabs isAdmin={true} />
+      <UserTabs />
       <form className="mt-8" onSubmit={handleCategorySubmit}>
         <div className="flex gap-2 items-end">
           <div className="grow">

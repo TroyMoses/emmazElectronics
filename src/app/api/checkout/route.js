@@ -1,5 +1,5 @@
 import {authOptions} from "@/app/api/auth/[...nextauth]/route";
-import {MenuItem} from "@/models/MenuItem";
+import {ProductItem} from "@/models/ProductItem";
 import {Order} from "@/models/Order";
 import mongoose from "mongoose";
 import {getServerSession} from "next-auth";
@@ -22,7 +22,7 @@ export async function POST(req) {
   const stripeLineItems = [];
   for (const cartProduct of cartProducts) {
 
-    const productInfo = await MenuItem.findById(cartProduct._id);
+    const productInfo = await ProductItem.findById(cartProduct._id);
 
     let productPrice = productInfo.basePrice;
     if (cartProduct.size) {

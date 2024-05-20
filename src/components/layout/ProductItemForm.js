@@ -1,21 +1,21 @@
 import Plus from "@/components/icons/Plus";
 import Trash from "@/components/icons/Trash";
 import EditableImage from "@/components/layout/EditableImage";
-import MenuItemPriceProps from "@/components/layout/MenuItemPriceProps";
+import ProductItemPriceProps from "@/components/layout/ProductItemPriceProps";
 import {useEffect, useState} from "react";
 
-export default function MenuItemForm({onSubmit,menuItem}) {
-  const [image, setImage] = useState(menuItem?.image || '');
-  const [name, setName] = useState(menuItem?.name || '');
-  const [description, setDescription] = useState(menuItem?.description || '');
-  const [basePrice, setBasePrice] = useState(menuItem?.basePrice || '');
-  const [sizes, setSizes] = useState(menuItem?.sizes || []);
-  const [category, setCategory] = useState(menuItem?.category || '');
+export default function ProductItemForm({onSubmit,productItem}) {
+  const [image, setImage] = useState(productItem?.image || '');
+  const [name, setName] = useState(productItem?.name || '');
+  const [description, setDescription] = useState(productItem?.description || '');
+  const [basePrice, setBasePrice] = useState(productItem?.basePrice || '');
+  const [sizes, setSizes] = useState(productItem?.sizes || []);
+  const [category, setCategory] = useState(productItem?.category || '');
   const [categories, setCategories] = useState([]);
   const [
-    extraIngredientPrices,
-    setExtraIngredientPrices,
-  ] = useState(menuItem?.extraIngredientPrices || []);
+    brandPrices,
+    setBrandPrices,
+  ] = useState(productItem?.brandPrices || []);
 
   useEffect(() => {
     fetch('/api/categories').then(res => {
@@ -29,7 +29,7 @@ export default function MenuItemForm({onSubmit,menuItem}) {
     <form
       onSubmit={ev =>
         onSubmit(ev, {
-          image,name,description,basePrice,sizes,extraIngredientPrices,category,
+          image,name,description,basePrice,sizes,brandPrices,category,
         })
       }
       className="mt-8 max-w-2xl mx-auto">
@@ -64,14 +64,14 @@ export default function MenuItemForm({onSubmit,menuItem}) {
             value={basePrice}
             onChange={ev => setBasePrice(ev.target.value)}
           />
-          <MenuItemPriceProps name={'Sizes'}
-                              addLabel={'Add item size'}
+          <ProductItemPriceProps name={'Sizes'}
+                              addLabel={'Add item size price'}
                               props={sizes}
                               setProps={setSizes} />
-          <MenuItemPriceProps name={'Extra ingredients'}
-                              addLabel={'Add ingredients prices'}
-                              props={extraIngredientPrices}
-                              setProps={setExtraIngredientPrices}/>
+          <ProductItemPriceProps name={'Brands'}
+                              addLabel={'Add item brand prices'}
+                              props={brandPrices}
+                              setProps={setBrandPrices}/>
           <button type="submit">Save</button>
         </div>
       </div>

@@ -10,13 +10,10 @@ export async function PUT(req) {
   const {_id, name, image, ...otherUserInfo} = data;
 
   let filter = {};
-  if (_id) {
-    filter = {_id};
-  } else {
-    const session = await getServerSession(authOptions);
-    const email = session.user.email;
-    filter = {email};
-  }
+  const session = await getServerSession(authOptions);
+  // const email = "test@example.com";
+  const email = "emmanuelarube123@gmail.com";
+  filter = {email};
 
   const user = await User.findOne(filter);
   await User.updateOne(filter, {name, image});
@@ -29,19 +26,28 @@ export async function GET(req) {
   mongoose.connect(process.env.MONGO_URL);
 
   const url = new URL(req.url);
-  const _id = url.searchParams.get('_id');
+  const userId = url.searchParams.get('_id');
+  console.log(url);
+  // console.log(userId);
 
+  // let filterUser = {};
+  // if (userId) {
+  //   filterUser = {userId};
+  // } else {
+  //   let email = "test@example.com";
+  //   // let email = "emmanuelarube123@gmail.com";
+  //   if (!email) {
+  //     return Response.json({});
+  //   }
+  //   filterUser = {email};
+  // }
   let filterUser = {};
-  if (_id) {
-    filterUser = {_id};
-  } else {
-    const session = await getServerSession(authOptions);
-    const email = session?.user?.email;
-    if (!email) {
-      return Response.json({});
-    }
-    filterUser = {email};
+  // let email = "test@example.com";
+  let email = "emmanuelarube123@gmail.com";
+  if (!email) {
+    return Response.json({});
   }
+  filterUser = {email};
 
   const user = await User.findOne(filterUser).lean();
   const userInfo = await UserInfo.findOne({email:user.email}).lean();

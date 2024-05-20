@@ -6,15 +6,15 @@ import Image from "next/image";
 import Link from "next/link";
 import {useEffect, useState} from "react";
 
-export default function MenuItemsPage() {
+export default function ProductItemsPage() {
 
-  const [menuItems, setMenuItems] = useState([]);
+  const [productItems, setProductItems] = useState([]);
   const {loading, data} = useProfile();
 
   useEffect(() => {
-    fetch('/api/menu-items').then(res => {
-      res.json().then(menuItems => {
-        setMenuItems(menuItems);
+    fetch('/api/product-items').then(res => {
+      res.json().then(productItems => {
+        setProductItems(productItems);
       });
     })
   }, []);
@@ -23,28 +23,28 @@ export default function MenuItemsPage() {
     return 'Loading user info...';
   }
 
-  if (!data.admin) {
-    return 'Not an admin.';
+  if (!data) {
+    return 'No profile found.';
   }
 
   return (
     <section className="mt-8 max-w-2xl mx-auto">
-      <UserTabs isAdmin={true} />
+      <UserTabs />
       <div className="mt-8">
         <Link
           className="button flex"
-          href={'/menu-items/new'}>
-          <span>Crete new menu item</span>
+          href={'/product-items/new'}>
+          <span>Crete new product item</span>
           <Right />
         </Link>
       </div>
       <div>
-        <h2 className="text-sm text-gray-500 mt-8">Edit menu item:</h2>
+        <h2 className="text-sm text-gray-500 mt-8">Edit product item:</h2>
         <div className="grid grid-cols-3 gap-2">
-          {menuItems?.length > 0 && menuItems.map(item => (
+          {productItems?.length > 0 && productItems.map(item => (
             <Link
               key={item._id}
-              href={'/menu-items/edit/'+item._id}
+              href={'/product-items/edit/'+item._id}
               className="bg-gray-200 rounded-lg p-4"
             >
               <div className="relative">

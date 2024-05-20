@@ -3,7 +3,7 @@ import {CartContext, cartProductPrice} from "@/components/AppContext";
 import Trash from "@/components/icons/Trash";
 import AddressInputs from "@/components/layout/AddressInputs";
 import SectionHeaders from "@/components/layout/SectionHeaders";
-import CartProduct from "@/components/menu/CartProduct";
+import CartProduct from "@/components/products/CartProduct";
 import {useProfile} from "@/components/UseProfile";
 import Image from "next/image";
 import {useContext, useEffect, useState} from "react";
@@ -95,7 +95,8 @@ export default function CartPage() {
             <CartProduct
               key={index}
               product={product}
-              onRemove={removeCartProduct}
+              onRemove={removeCartProduct} 
+              index={index}
             />
           ))}
           <div className="py-2 pr-16 flex justify-end items-center">

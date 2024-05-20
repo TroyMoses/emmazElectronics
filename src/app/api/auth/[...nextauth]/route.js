@@ -9,6 +9,7 @@ import GoogleProvider from "next-auth/providers/google";
 import { MongoDBAdapter } from "@auth/mongodb-adapter"
 
 export const authOptions = {
+  cache: false,
   secret: process.env.SECRET,
   adapter: MongoDBAdapter(clientPromise),
   providers: [
@@ -33,7 +34,13 @@ export const authOptions = {
         console.log(user);
         console.log(passwordOk);
         if (passwordOk) {
-          return user;
+          console.log("User logged in successfully:", user);
+          // const result = await signIn(req, res, user, { redirect: false });
+          // const userId = user._id.toString();
+
+          // const redirectUrl = `${process.env.NEXTAUTH_URL}/profile?userId=${userId}`;
+          // return result.url = redirectUrl;
+          // return redirectUrl;
         }
 
         return null
@@ -42,18 +49,18 @@ export const authOptions = {
   ],
 };
 
-export async function isAdmin() {
-  const session = await getServerSession(authOptions);
-  const userEmail = session?.user?.email;
-  if (!userEmail) {
-    return false;
-  }
-  const userInfo = await UserInfo.findOne({email:userEmail});
-  if (!userInfo) {
-    return false;
-  }
-  return userInfo.admin;
-}
+// export async function isAdmin() {
+//   const session = await getServerSession(authOptions);
+//   const userEmail = session?.user?.email;
+//   if (!userEmail) {
+//     return false;
+//   }
+//   const userInfo = await UserInfo.findOne({email:userEmail});
+//   if (!userInfo) {
+//     return false;
+//   }
+//   return userInfo.admin;
+// }
 
 const handler = NextAuth(authOptions);
 

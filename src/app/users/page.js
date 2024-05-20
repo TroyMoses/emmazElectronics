@@ -21,13 +21,13 @@ export default function UsersPage() {
     return 'Loading user info...';
   }
 
-  if (!data.admin) {
-    return 'Not an admin';
+  if (!data) {
+    return 'No profile found';
   }
 
   return (
     <section className="max-w-2xl mx-auto mt-8">
-      <UserTabs isAdmin={true} />
+      <UserTabs />
       <div className="mt-8">
         {users?.length > 0 && users.map(user => (
           <div
@@ -41,7 +41,8 @@ export default function UsersPage() {
               <span className="text-gray-500">{user.email}</span>
             </div>
             <div>
-              <Link className="button" href={'/users/'+user._id}>
+              {/* <Link className="button" href={'/users/'+user._id}> */}
+              <Link className="button" href={'/profile'}>
                 Edit
               </Link>
             </div>

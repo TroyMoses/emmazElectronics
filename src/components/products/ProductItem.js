@@ -1,30 +1,30 @@
 import {CartContext} from "@/components/AppContext";
-import MenuItemTile from "@/components/menu/MenuItemTile";
+import ProductItemTile from "@/components/products/ProductItemTile";
 import Image from "next/image";
 import {useContext, useState} from "react";
 import FlyingButton from "react-flying-item";
 import toast from "react-hot-toast";
 
-export default function MenuItem(menuItem) {
+export default function ProductItem(productItem) {
   const {
     image,name,description,basePrice,
-    sizes, extraIngredientPrices,
-  } = menuItem;
+    sizes, brandPrices,
+  } = productItem;
   const [
     selectedSize, setSelectedSize
   ] = useState(sizes?.[0] || null);
-  const [selectedExtras, setSelectedExtras] = useState([]);
+  const [selectedBrand, setSelectedBrand] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
   const {addToCart} = useContext(CartContext);
 
   async function handleAddToCartButtonClick() {
     console.log('add to cart');
-    const hasOptions = sizes.length > 0 || extraIngredientPrices.length > 0;
+    const hasOptions = sizes.length > 0 || brandPrices.length > 0;
     if (hasOptions && !showPopup) {
       setShowPopup(true);
       return;
     }
-    addToCart(menuItem, selectedSize, selectedExtras);
+    addToCart(productItem, selectedSize, selectedBrand);
     await new Promise(resolve => setTimeout(resolve, 1000));
     console.log('hiding popup');
     setShowPopup(false);
@@ -32,9 +32,9 @@ export default function MenuItem(menuItem) {
   function handleExtraThingClick(ev, extraThing) {
     const checked = ev.target.checked;
     if (checked) {
-      setSelectedExtras(prev => [...prev, extraThing]);
+      setSelectedBrand(prev => [...prev, extraThing]);
     } else {
-      setSelectedExtras(prev => {
+      setSelectedBrand(prev => {
         return prev.filter(e => e.name !== extraThing.name);
       });
     }
@@ -44,8 +44,8 @@ export default function MenuItem(menuItem) {
   if (selectedSize) {
     selectedPrice += selectedSize.price;
   }
-  if (selectedExtras?.length > 0) {
-    for (const extra of selectedExtras) {
+  if (selectedBrand?.length > 0) {
+    for (const extra of selectedBrand) {
       selectedPrice += extra.price;
     }
   }
@@ -98,7 +98,7 @@ export default function MenuItem(menuItem) {
                       <input
                         type="checkbox"
                         onChange={ev => handleExtraThingClick(ev, extraThing)}
-                        checked={selectedExtras.map(e => e._id).includes(extraThing._id)}
+                        checked={selectedBrand.map(e => e._id).includes(extraThing._id)}
                         name={extraThing.name} />
                       {extraThing.name} +${extraThing.price}
                     </label>
@@ -123,9 +123,9 @@ export default function MenuItem(menuItem) {
           </div>
         </div>
       )}
-      <MenuItemTile
+      <ProductItemTile
         onAddToCart={handleAddToCartButtonClick}
-        {...menuItem} />
+        {...productItem} />
     </>
   );
 }

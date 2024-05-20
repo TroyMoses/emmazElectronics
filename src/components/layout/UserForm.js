@@ -49,7 +49,6 @@ export default function UserForm({user,onSave}) {
         <label>Email</label>
         <input
           type="email"
-          disabled={true}
           value={user.email}
           placeholder={'email'}
         />
