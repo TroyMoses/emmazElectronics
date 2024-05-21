@@ -5,8 +5,9 @@ import mongoose from "mongoose";
 export async function POST(req) {
   mongoose.connect(process.env.MONGO_URL);
   const data = await req.json();
+  console.log(data);
   if (!data.category) {
-    return Response.json({ message: "Missing required field: category" }, 400);
+    throw new Error("Missing required field: category");
   } else if (data) {
     const productItemDoc = await ProductItem.create(data);
     return Response.json(productItemDoc);

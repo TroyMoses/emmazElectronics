@@ -9,7 +9,7 @@ export default function HomeProducts() {
   useEffect(() => {
     fetch('/api/product-items').then(res => {
       res.json().then(productItems => {
-        setBestSellers(productItems.slice(-3));
+        setBestSellers(productItems.slice(-9));
       });
     });
   }, []);

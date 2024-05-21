@@ -10,6 +10,23 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'dawid-food-ordering.s3.amazonaws.com',
       },
+      {
+        protocol: 'https',
+        hostname: '*.ftc.edu',
+      },
+      {
+        protocol: 'https',
+        hostname: '*.media-amazon.com',
+      },
+      {
+        protocol: 'https',
+        hostname: '*.verbatim.com.au',
+      },
+      {
+        protocol: 'https',
+        hostname: 'ae01.alicdn.com',
+      },
+
     ], // Update this with your remote image domains or patterns
     loader: 'default', // Specify the image loader to use ('default', 'imgix', 'cloudinary', or a custom loader)
     path: '/_next/image', // Specify the path for the optimized images

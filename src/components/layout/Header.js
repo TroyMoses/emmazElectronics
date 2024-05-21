@@ -73,11 +73,16 @@ export default function Header() {
           <Link href={'/profile'} className="whitespace-nowrap">
            Hello, {userName}
           </Link>
-          <button
+          {/* <button
             onClick={() => signOut()}
             className="bg-primary rounded-full text-white px-8 py-2">
             Logout
-          </button>
+          </button> */}
+          <Link href={'/login'} className="bg-primary rounded-full text-white px-8 py-2">Logout</Link>
+          {/* <Link href={'/login'}>Login</Link>
+          <Link href={'/register'} className="bg-primary rounded-full text-white px-8 py-2">
+           Register
+          </Link> */}
         </div>
       )}
       <div className="hidden md:flex items-center justify-between">
@@ -95,11 +100,16 @@ export default function Header() {
         <Link href={'/profile'} className="whitespace-nowrap">
            Hello, {userName}
           </Link>
-          <button
+          {/* <button
             onClick={() => signOut()}
             className="bg-primary rounded-full text-white px-8 py-2">
             Logout
-          </button>
+          </button> */}
+          <Link href={'/login'} className="bg-primary rounded-full text-white px-8 py-2">Logout</Link>
+          {/* <Link href={'/login'}>Login</Link>
+          <Link href={'/register'} className="bg-primary rounded-full text-white px-8 py-2">
+           Register
+          </Link> */}
           <Link href={'/cart'} className="relative">
             <ShoppingCart />
             {cartProducts?.length > 0 && (

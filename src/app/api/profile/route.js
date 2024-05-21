@@ -27,7 +27,7 @@ export async function GET(req) {
 
   const url = new URL(req.url);
   const userId = url.searchParams.get('_id');
-  console.log(url);
+  // console.log(url);
   // console.log(userId);
 
   // let filterUser = {};

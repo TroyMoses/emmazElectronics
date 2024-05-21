@@ -23,6 +23,7 @@ export default function NewProductItemPage() {
         body: JSON.stringify(data),
         headers: { 'Content-Type': 'application/json' },
       });
+      console.log(response);
       if (response.ok)
         resolve();
       else
