@@ -113,13 +113,13 @@ export default function CartPage() {
                 {product.extras?.length > 0 && (
                   <div className="text-sm text-gray-500">
                     {product.extras.map(extra => (
-                      <div key={extra.name}>{extra.name} ${extra.price}</div>
+                      <div key={extra.name}>{extra.name} USh {extra.price}</div>
                     ))}
                   </div>
                 )}
               </div>
               <div className="text-lg font-semibold">
-                ${cartProductPrice(product)}
+                USh {cartProductPrice(product)}
               </div>
                 <div className="ml-2">
                   <button
@@ -138,9 +138,9 @@ export default function CartPage() {
               Total:
             </div>
             <div className="font-semibold pl-2 text-right">
-              ${subtotal}<br />
-              $5<br />
-              ${subtotal + 5}
+              USh {subtotal}<br />
+              USh 5000<br />
+              USh {subtotal + 5000}
             </div>
           </div>
         </div>
@@ -151,7 +151,7 @@ export default function CartPage() {
               addressProps={address}
               setAddressProp={handleAddressChange}
             />
-            <button type="submit">Pay ${subtotal+5}</button>
+            <button type="submit">Pay USh {subtotal+5000}</button>
           </form>
         </div>
       </div>

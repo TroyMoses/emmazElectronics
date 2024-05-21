@@ -1,5 +1,6 @@
 import Right from "@/components/icons/Right";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Hero() {
   return (

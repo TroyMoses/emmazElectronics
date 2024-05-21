@@ -26,6 +26,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'ae01.alicdn.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'ug.jumia.is',
+      },
 
     ], // Update this with your remote image domains or patterns
     loader: 'default', // Specify the image loader to use ('default', 'imgix', 'cloudinary', or a custom loader)

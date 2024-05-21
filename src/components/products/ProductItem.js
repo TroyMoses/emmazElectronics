@@ -83,7 +83,7 @@ export default function ProductItem(productItem) {
                         onChange={() => setSelectedSize(size)}
                         checked={selectedSize?.name === size.name}
                         name="size"/>
-                      {size.name} ${basePrice + size.price}
+                      {size.name} USh {basePrice + size.price}
                     </label>
                   ))}
                 </div>
@@ -100,7 +100,7 @@ export default function ProductItem(productItem) {
                         onChange={ev => handleExtraThingClick(ev, extraThing)}
                         checked={selectedBrand.map(e => e._id).includes(extraThing._id)}
                         name={extraThing.name} />
-                      {extraThing.name} +${extraThing.price}
+                      {extraThing.name} +USh {extraThing.price}
                     </label>
                   ))}
                 </div>
@@ -111,7 +111,7 @@ export default function ProductItem(productItem) {
                 src={image}>
                 <div className="primary sticky bottom-2"
                      onClick={handleAddToCartButtonClick}>
-                  Add to cart ${selectedPrice}
+                  Add to cart USh {selectedPrice}
                 </div>
               </FlyingButton>
               <button

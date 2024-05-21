@@ -20,13 +20,13 @@ export default function CartProduct({product,onRemove}) {
         {product.extras?.length > 0 && (
           <div className="text-sm text-gray-500">
             {product.extras.map(extra => (
-              <div key={extra.name}>{extra.name} ${extra.price}</div>
+              <div key={extra.name}>{extra.name} USh {extra.price}</div>
             ))}
           </div>
         )}
       </div>
       <div className="text-lg font-semibold">
-        ${cartProductPrice(product)}
+        USh {cartProductPrice(product)}
       </div>
       {!!onRemove && (
         <div className="ml-2">
