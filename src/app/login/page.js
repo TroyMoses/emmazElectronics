@@ -2,6 +2,7 @@
 import {signIn} from "next-auth/react";
 import Image from "next/image";
 import {useState} from "react";
+import Link from 'next/link';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -28,7 +29,10 @@ export default function LoginPage() {
         <input type="password" name="password" placeholder="password" value={password}
                disabled={loginInProgress}
                onChange={ev => setPassword(ev.target.value)}/>
-        <button disabled={loginInProgress} type="submit">Login</button>
+        {/* <button disabled={loginInProgress} type="submit">Login</button> */}
+        <button class="bg-primary text-white">
+          <Link disabled={loginInProgress} href={'/'}>Login</Link>
+        </button>
         <div className="my-4 text-center text-gray-500">
           or login with provider
         </div>

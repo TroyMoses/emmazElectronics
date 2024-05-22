@@ -13,10 +13,10 @@ export const authOptions = {
   secret: process.env.SECRET,
   adapter: MongoDBAdapter(clientPromise),
   providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    }),
+    // GoogleProvider({
+    //   clientId: process.env.GOOGLE_CLIENT_ID,
+    //   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    // }),
     CredentialsProvider({
       name: 'Credentials',
       id: 'credentials',
@@ -35,12 +35,6 @@ export const authOptions = {
         console.log(passwordOk);
         if (passwordOk) {
           console.log("User logged in successfully:", user);
-          // const result = await signIn(req, res, user, { redirect: false });
-          // const userId = user._id.toString();
-
-          // const redirectUrl = `${process.env.NEXTAUTH_URL}/profile?userId=${userId}`;
-          // return result.url = redirectUrl;
-          // return redirectUrl;
         }
 
         return null
