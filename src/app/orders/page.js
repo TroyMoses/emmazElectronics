@@ -10,10 +10,22 @@ export default function OrdersPage() {
   const [orders, setOrders] = useState([]);
   const [loadingOrders, setLoadingOrders] = useState(true);
   const {loading, data:profile} = useProfile();
+  const [user, setUser] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
+    fetchAdmin();
     fetchOrders();
   }, []);
+
+  function fetchAdmin() {
+    fetch('/api/profile').then(response => {
+      response.json().then(data => {
+        setUser(data);
+        setIsAdmin(data.admin);
+      })
+    });
+  }
 
   function fetchOrders() {
     setLoadingOrders(true);
@@ -27,7 +39,7 @@ export default function OrdersPage() {
 
   return (
     <section className="mt-8 max-w-2xl mx-auto">
-      <UserTabs />
+      <UserTabs isAdmin={isAdmin}/>
       <div className="mt-8">
         {loadingOrders && (
           <div>Loading orders...</div>

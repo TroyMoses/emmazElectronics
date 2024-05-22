@@ -36,7 +36,7 @@ import {useContext, useState} from "react";
 export default function Header() {
   // const session = useSession();
   // console.log(session);
-  const userName = "Reuben"
+  const userName = "User"
   const {cartProducts} = useContext(CartContext);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   

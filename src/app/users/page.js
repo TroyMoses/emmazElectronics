@@ -8,13 +8,21 @@ export default function UsersPage() {
 
   const [users, setUsers] = useState([]);
   const {loading,data} = useProfile();
+  const [user, setUser] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     fetch('/api/users').then(response => {
       response.json().then(users => {
         setUsers(users);
       });
-    })
+    });
+    fetch('/api/profile').then(response => {
+      response.json().then(data => {
+        setUser(data);
+        setIsAdmin(data.admin);
+      })
+    });
   }, []);
 
   if (loading) {
@@ -27,7 +35,7 @@ export default function UsersPage() {
 
   return (
     <section className="max-w-2xl mx-auto mt-8">
-      <UserTabs />
+      <UserTabs isAdmin={isAdmin}/>
       <div className="mt-8">
         {users?.length > 0 && users.map(user => (
           <div

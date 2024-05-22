@@ -14,8 +14,9 @@ export default function EditUserPage() {
 
   useEffect(() => {
     fetch('/api/profile?_id='+id).then(res => {
-      res.json().then(user => {
-        setUser(user);
+      res.json().then(data => {
+        setUser(data);
+        setIsAdmin(data.admin);
       });
     })
   }, []);

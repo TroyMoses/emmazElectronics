@@ -17,6 +17,8 @@ export default function EditProductItemPage() {
   const [productItem, setProductItem] = useState(null);
   const [redirectToItems, setRedirectToItems] = useState(false);
   const {loading, data} = useProfile();
+  const [user, setUser] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     fetch('/api/product-items').then(res => {
@@ -24,7 +26,12 @@ export default function EditProductItemPage() {
         const item = items.find(i => i._id === id);
         setProductItem(item);
       });
-    })
+    });fetch('/api/profile').then(response => {
+      response.json().then(data => {
+        setUser(data);
+        setIsAdmin(data.admin);
+      })
+    });
   }, []);
 
   async function handleFormSubmit(ev, data) {
@@ -85,7 +92,7 @@ export default function EditProductItemPage() {
 
   return (
     <section className="mt-8">
-      <UserTabs />
+      <UserTabs isAdmin={isAdmin}/>
       <div className="max-w-2xl mx-auto mt-8">
         <Link href={'/product-items'} className="button">
           <Left />

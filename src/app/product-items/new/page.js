@@ -7,13 +7,24 @@ import UserTabs from "@/components/layout/UserTabs";
 import {useProfile} from "@/components/UseProfile";
 import Link from "next/link";
 import {redirect} from "next/navigation";
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import toast from "react-hot-toast";
 
 export default function NewProductItemPage() {
 
   const [redirectToItems, setRedirectToItems] = useState(false);
   const {loading, data} = useProfile();
+  const [user, setUser] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    fetch('/api/profile').then(response => {
+      response.json().then(data => {
+        setUser(data);
+        setIsAdmin(data.admin);
+      })
+    });
+  }, []);
 
   async function handleFormSubmit(ev, data) {
     ev.preventDefault();
@@ -52,7 +63,7 @@ export default function NewProductItemPage() {
 
   return (
     <section className="mt-8">
-      <UserTabs />
+      <UserTabs isAdmin={isAdmin}/>
       <div className="max-w-2xl mx-auto mt-8">
         <Link href={'/product-items'} className="button">
           <Left />

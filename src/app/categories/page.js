@@ -7,12 +7,15 @@ import toast from "react-hot-toast";
 
 export default function CategoriesPage() {
 
+  const [user, setUser] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [categoryName, setCategoryName] = useState('');
   const [categories, setCategories] = useState([]);
   const {loading:profileLoading, data:profileData} = useProfile();
   const [editedCategory, setEditedCategory] = useState(null);
 
   useEffect(() => {
+    fetchAdmin();
     fetchCategories();
   }, []);
 
@@ -20,6 +23,15 @@ export default function CategoriesPage() {
     fetch('/api/categories').then(res => {
       res.json().then(categories => {
         setCategories(categories);
+      });
+    });
+  }
+
+  function fetchAdmin() {
+    fetch('/api/profile').then(response => {
+      response.json().then(data => {
+        setUser(data);
+        setIsAdmin(data.admin);
       });
     });
   }
@@ -84,7 +96,7 @@ export default function CategoriesPage() {
 
   return (
     <section className="mt-8 max-w-2xl mx-auto">
-      <UserTabs />
+      <UserTabs isAdmin={isAdmin}/>
       <form className="mt-8" onSubmit={handleCategorySubmit}>
         <div className="flex gap-2 items-end">
           <div className="grow">
