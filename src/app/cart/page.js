@@ -97,7 +97,7 @@ export default function CartPage() {
             //   product={product}
             //   onRemove={removeCartProduct}
             // />
-            <div className="flex items-center gap-4 border-b py-4">
+            <div key={index} className="flex items-center gap-4 border-b py-4">
               <div className="w-24">
                 <Image width={240} height={240} src={product.image} alt={''} />
               </div>
